@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  identitymongo:
+    image: ${DOCKER_REGISTRY-}identitymongo
+    build:
+      context: .
+      dockerfile: IdentityMongo/Dockerfile
+    ports:
+      - 9001:443
+      - 9000:80
+  
+  mongodata:
+    image: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodbdata:/data/db
+volumes:
+  mongodbdata: 
